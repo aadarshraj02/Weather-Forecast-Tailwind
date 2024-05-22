@@ -52,10 +52,19 @@
           <div class="flex flex-col md:flex-row justify-between items-center">
             <div class="mb-4 md:mb-0">
               <h2 class="text-2xl font-bold mb-2">Current Weather Forecast</h2>
-              <p class="mb-1"><strong>Date:</strong> May 22, 2024</p>
-              <p class="mb-1"><strong>Temperature:</strong> 25°C</p>
-              <p class="mb-1"><strong>Humidity:</strong> 60%</p>
-              <p class="mb-1"><strong>Wind Speed:</strong> 15 km/h</p>
+              <p class="mb-1">
+                <strong>Date:</strong> <span id="current-date"></span>
+              </p>
+              <p class="mb-1">
+                <strong>Temperature:</strong><span id="current-temp"></span>
+              </p>
+              <p class="mb-1">
+                <strong>Humidity:</strong> <span id="current-humidity"></span>
+              </p>
+              <p class="mb-1">
+                <strong>Wind Speed:</strong>
+                <span id="current-wind-speed"></span>
+              </p>
             </div>
             <div class="flex flex-col items-center">
               <img src="" alt="Weather Icon" class="w-24 h-24 mb-2" />
@@ -77,8 +86,13 @@
                 <p class="mb-1"><strong>Wind Speed:</strong> 15 km/h</p>
               </div>
               <div class="flex flex-col items-center">
-                <img src="" alt="Weather Icon" class="w-24 h-24 mb-2" />
-                <p>Cloudy</p>
+                <img
+                  id="current-icon"
+                  src=""
+                  alt="Weather Icon"
+                  class="w-24 h-24 mb-2"
+                />
+                <p id="current-description">Cloudy</p>
               </div>
             </div>
           </div>
