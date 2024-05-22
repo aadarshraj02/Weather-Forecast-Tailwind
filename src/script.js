@@ -141,3 +141,19 @@ function saveCityToLocalStorage(city) {
     localStorage.setItem("recentCities", JSON.stringify(cities));
   }
 }
+
+function updateRecentCitiesDropdown() {
+  let cities = JSON.parse(localStorage.getItem("recentCities")) || [];
+  recentCities.innerHTML = '<option value="">Select a city</option>';
+  cities.forEach((city) => {
+    let option = document.createElement("option");
+    option.value = city;
+    option.textContent = city;
+    recentCities.appendChild(option);
+  });
+  if (cities.length > 0) {
+    recentCities.classList.remove("hidden");
+  } else {
+    recentCities.classList.add("hidden");
+  }
+}
