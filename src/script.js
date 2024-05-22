@@ -19,6 +19,18 @@ const fetchWeather = async (city) => {
   }
 };
 
+async function fetchWeatherByCoords(lat, lon) {
+  const apiKey = "8f6200216e7a219e044fb1179fea87b6";
+  const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    updateWeather(data);
+  } catch (error) {
+    console.error("Error fetching data", error);
+  }
+}
+
 const updateWeather = (data) => {
   const current = data.list[0];
   document.getElementById("current-date").innerHTML = new Date(
