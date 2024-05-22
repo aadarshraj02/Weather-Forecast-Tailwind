@@ -133,3 +133,11 @@ function displayError(message) {
 function clearError() {
   errorMessage.innerHTML = "";
 }
+
+function saveCityToLocalStorage(city) {
+  let cities = JSON.parse(localStorage.getItem("recentCities")) || [];
+  if (!cities.includes(city)) {
+    cities.push(city);
+    localStorage.setItem("recentCities", JSON.stringify(cities));
+  }
+}
