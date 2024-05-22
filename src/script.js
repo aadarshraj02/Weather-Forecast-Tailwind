@@ -111,3 +111,10 @@ const updateWeather = (data) => {
       `;
   }
 };
+
+function displayError(message) {
+  errorMessage.innerHTML = "";
+}
+function clearError() {
+  errorMessage.innerHTML = "";
+}
