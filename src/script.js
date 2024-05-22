@@ -3,11 +3,13 @@ const CurrentLocationBtn = document.getElementById("current-location-btn");
 // const apiKey = "8f6200216e7a219e044fb1179fea87b6";
 const hideCurrent = document.querySelector(".hideCurrent");
 const hideAll = document.querySelector(".hideAll");
+const cityInput = document.getElementById("city-input");
 
 searchBtn.addEventListener("click", function () {
   const city = document.getElementById("city-input").value.trim();
   if (!city) {
     alert("City Name is Empty");
+    return;
   } else {
     fetchWeather(city);
     hideCurrent.classList.remove("hideCurrent");
@@ -39,6 +41,7 @@ const fetchWeather = async (city) => {
     } else {
       const data = await response.json();
       updateWeather(data);
+      cityInput.value = "";
     }
   } catch (error) {
     console.log("error fetching data", error);
