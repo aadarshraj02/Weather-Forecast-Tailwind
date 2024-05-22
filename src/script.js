@@ -43,6 +43,7 @@ const fetchWeather = async (city) => {
       const data = await response.json();
       updateWeather(data);
       cityInput.value = "";
+      cityName.innerHTML = `Weather forecast for ${data.city.name}`;
     }
   } catch (error) {
     console.log("error fetching data", error);
@@ -56,6 +57,7 @@ async function fetchWeatherByCoords(lat, lon) {
     const response = await fetch(url);
     const data = await response.json();
     updateWeather(data);
+    cityName.innerHTML = `Weather forecast for ${data.city.name}`;
   } catch (error) {
     console.error("Error fetching data", error);
   }
