@@ -13,7 +13,7 @@ const fetchWeather = async (city) => {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data);
+    updateWeather(data);
   } catch (error) {
     console.log("error fetching data", error);
   }
@@ -23,7 +23,7 @@ const updateWeather = (data) => {
   const current = data.list[0];
   document.getElementById("current-date").innerHTML = new Date(
     current.dt * 1000
-  ).join("/ ");
+  ).toDateString();
   document.getElementById(
     "current-temp"
   ).textContent = `${current.main.temp}°C`;
@@ -40,7 +40,7 @@ const updateWeather = (data) => {
     current.weather[0].description;
 
   for (let i = 1; i <= 5; i++) {
-    const forecast = data.list[i * 8 - 1]; 
+    const forecast = data.list[i * 8 - 1];
     const forecastEl = document.getElementById(`forecast-${i}`);
     forecastEl.innerHTML = `
         <div class="flex flex-col md:flex-row justify-between items-center">
