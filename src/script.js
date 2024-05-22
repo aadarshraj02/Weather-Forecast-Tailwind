@@ -7,6 +7,18 @@ searchBtn.addEventListener("click", function () {
   fetchWeather(city);
 });
 
+CurrentLocationBtn.addEventListener("click", function () {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      fetchWeatherByCoords(lat, lon);
+    });
+  } else {
+    alert("Location not supported");
+  }
+});
+
 const fetchWeather = async (city) => {
   const apiKey = "8f6200216e7a219e044fb1179fea87b6";
   const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
