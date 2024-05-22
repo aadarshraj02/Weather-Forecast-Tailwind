@@ -5,6 +5,7 @@ const hideCurrent = document.querySelector(".hideCurrent");
 const hideAll = document.querySelector(".hideAll");
 const cityInput = document.getElementById("city-input");
 const cityName = document.getElementById("city-name");
+const errorMessage = document.getElementById("error-message");
 
 searchBtn.addEventListener("click", function () {
   const city = document.getElementById("city-input").value.trim();
