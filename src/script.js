@@ -6,9 +6,13 @@ const hideAll = document.querySelector(".hideAll");
 
 searchBtn.addEventListener("click", function () {
   const city = document.getElementById("city-input").value.trim();
-  fetchWeather(city);
-  hideCurrent.classList.remove("hideCurrent");
-  hideAll.classList.remove("hideAll");
+  if (!city) {
+    alert("City Name is Empty");
+  } else {
+    fetchWeather(city);
+    hideCurrent.classList.remove("hideCurrent");
+    hideAll.classList.remove("hideAll");
+  }
 });
 
 CurrentLocationBtn.addEventListener("click", function () {
@@ -17,6 +21,8 @@ CurrentLocationBtn.addEventListener("click", function () {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
       fetchWeatherByCoords(lat, lon);
+      hideCurrent.classList.remove("hideCurrent");
+      hideAll.classList.remove("hideAll");
     });
   } else {
     alert("Location not supported");
