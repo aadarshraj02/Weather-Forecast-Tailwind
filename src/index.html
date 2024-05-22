@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Forecast</title>
     <script src="script.js" defer></script>
+    <!-- Tailwind css file -->
     <link rel="stylesheet" href="output.css" />
   </head>
 
   <body class="bg-sky-200">
+    <!-- Header  -->
     <header>
       <div
         class="flex flex-wrap items-center justify-between p-4 bg-slate-900 text-white"
@@ -21,12 +23,14 @@
       </div>
     </header>
     <main>
+      <!-- Heading of the page  -->
       <h1 class="text-center font-bold text-4xl mt-5 text-gray-700">
         Search Your City Here
       </h1>
       <div
         class="flex flex-col justify-center items-center sm:mx-4 md:mx-8 p-4"
       >
+        <!-- Input Box -->
         <div class="search-input w-full sm:w-3/4 md:w-3/4 lg:w-1/2 p-4 m-2">
           <input
             id="city-input"
@@ -34,32 +38,38 @@
             placeholder="Enter City Name"
             class="w-full p-2 border border-gray-300 rounded outline-none"
           />
+          <!-- Search Button -->
           <button
             id="search-btn"
             class="w-full p-2 mb-2 bg-green-500 text-white rounded mt-2"
           >
             Search
           </button>
+          <!-- Location Button -->
           <button
             id="current-location-btn"
             class="w-full p-2 bg-blue-500 text-white rounded"
           >
             Use Current Location
           </button>
+          <!-- Dropdown Menu -->
           <select
             title="recent-cities"
             id="recent-cities"
             class="w-full p-2 mt-2 bg-white border rounded hidden"
           ></select>
+          <!-- Searched City Name -->
           <div
             id="city-name"
             class="mt-4 p-2 text-2xl font-bold text-center text-gray-700"
           ></div>
+          <!-- Error Message Div -->
           <div
             id="error-message"
             class="mt-4 p-2 text-2xl font-bold text-center text-red-500"
           ></div>
         </div>
+        <!-- Current Weather Div -->
         <div
           class="bg-slate-900 text-white shadow-md rounded-lg p-6 w-full max-w-4xl hideCurrent"
         >
@@ -92,6 +102,7 @@
           </div>
         </div>
       </div>
+      <!-- Title for 5 days forecast -->
       <h1 class="text-center font-bold text-4xl text-gray-700">
         5 Days Forecast
       </h1>
@@ -99,6 +110,7 @@
         <div
           class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full p-4 sm:mx-4 md:mx-8"
         >
+          <!-- Cards for each day forecast -->
           <div
             class="bg-slate-900 text-white rounded-lg p-6 w-full"
             id="forecast-1"
@@ -122,6 +134,8 @@
         </div>
       </div>
     </main>
-    <footer></footer>
+    <footer>
+      <!-- Footer  -->
+    </footer>
   </body>
 </html>
