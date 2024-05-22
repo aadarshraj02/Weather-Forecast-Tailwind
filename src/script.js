@@ -49,6 +49,9 @@ const fetchWeather = async (city) => {
     } else {
       const data = await response.json();
       updateWeather(data);
+      saveCityToLocalStorage(city);
+      updateRecentCitiesDropdown();
+
       cityInput.value = "";
       cityName.innerHTML = `Weather forecast for ${data.city.name}`;
       clearError();
@@ -76,6 +79,8 @@ recentCities.addEventListener("change", (event) => {
   const city = event.target.value;
   if (city) {
     fetchWeather(city);
+    hideCurrent.classList.remove("hideCurrent");
+    hideAll.classList.remove("hideAll");
   }
 });
 
@@ -157,3 +162,5 @@ function updateRecentCitiesDropdown() {
     recentCities.classList.add("hidden");
   }
 }
+
+updateRecentCitiesDropdown();
