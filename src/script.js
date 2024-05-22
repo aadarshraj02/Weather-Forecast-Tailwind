@@ -21,13 +21,18 @@ searchBtn.addEventListener("click", function () {
 
 CurrentLocationBtn.addEventListener("click", function () {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
-      fetchWeatherByCoords(lat, lon);
-      hideCurrent.classList.remove("hideCurrent");
-      hideAll.classList.remove("hideAll");
-    });
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        fetchWeatherByCoords(lat, lon);
+        hideCurrent.classList.remove("hideCurrent");
+        hideAll.classList.remove("hideAll");
+      },
+      () => {
+        displayError("Unable to retrieve your location");
+      }
+    );
   } else {
     alert("Location not supported");
   }
@@ -45,9 +50,10 @@ const fetchWeather = async (city) => {
       updateWeather(data);
       cityInput.value = "";
       cityName.innerHTML = `Weather forecast for ${data.city.name}`;
+      clearError();
     }
   } catch (error) {
-    console.log("error fetching data", error);
+    displayError(error.message);
   }
 };
 
@@ -59,8 +65,9 @@ async function fetchWeatherByCoords(lat, lon) {
     const data = await response.json();
     updateWeather(data);
     cityName.innerHTML = `Weather forecast for ${data.city.name}`;
+    clearError();
   } catch (error) {
-    console.error("Error fetching data", error);
+    displayError(error.message);
   }
 }
 
