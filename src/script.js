@@ -1,3 +1,4 @@
+// Selected all required elements from html here
 const searchBtn = document.getElementById("search-btn");
 const CurrentLocationBtn = document.getElementById("current-location-btn");
 // const apiKey = "8f6200216e7a219e044fb1179fea87b6";
@@ -8,18 +9,21 @@ const cityName = document.getElementById("city-name");
 const errorMessage = document.getElementById("error-message");
 const recentCities = document.getElementById("recent-cities");
 
+//Event Listener on search button to get weather according to cities
 searchBtn.addEventListener("click", function () {
-  const city = document.getElementById("city-input").value.trim();
+  const city = document.getElementById("city-input").value.trim(); //used trim to remove extra spaces
   if (!city) {
+    //applied if condition if city will empty it will display alert
     alert("City Name is Empty");
     return;
   } else {
     fetchWeather(city);
-    hideCurrent.classList.remove("hideCurrent");
-    hideAll.classList.remove("hideAll");
+    hideCurrent.classList.remove("hideCurrent"); //unhide the div to show current temp detail card
+    hideAll.classList.remove("hideAll"); //unhide the div to display 5 days forecast cards
   }
 });
 
+//Event listener on current location button
 CurrentLocationBtn.addEventListener("click", function () {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -27,8 +31,8 @@ CurrentLocationBtn.addEventListener("click", function () {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
         fetchWeatherByCoords(lat, lon);
-        hideCurrent.classList.remove("hideCurrent");
-        hideAll.classList.remove("hideAll");
+        hideCurrent.classList.remove("hideCurrent"); //unhide the div to show current temp detail card
+        hideAll.classList.remove("hideAll"); //unhide the div to display 5 days forecast cards
       },
       () => {
         displayError("Unable to retrieve your location");
@@ -49,8 +53,8 @@ const fetchWeather = async (city) => {
     } else {
       const data = await response.json();
       updateWeather(data);
-      saveCityToLocalStorage(city);
-      updateRecentCitiesDropdown();
+      saveCityToLocalStorage(city); //save city to local storage
+      updateRecentCitiesDropdown(); //save city to dropdown
 
       cityInput.value = "";
       cityName.innerHTML = `Weather forecast for ${data.city.name}`;
@@ -105,7 +109,7 @@ const updateWeather = (data) => {
     current.weather[0].description;
 
   for (let i = 1; i <= 5; i++) {
-    const forecast = data.list[i * 8 - 1];
+    const forecast = data.list[i * 8 - 1]; //update weather forecast every 8 hour
     const forecastEl = document.getElementById(`forecast-${i}`);
     forecastEl.innerHTML = `
         <div class="flex flex-col md:flex-row justify-between items-center">
@@ -140,6 +144,7 @@ function clearError() {
   errorMessage.innerHTML = "";
 }
 
+//saved cities to local storage
 function saveCityToLocalStorage(city) {
   let cities = JSON.parse(localStorage.getItem("recentCities")) || [];
   if (!cities.includes(city)) {
@@ -148,8 +153,9 @@ function saveCityToLocalStorage(city) {
   }
 }
 
+//update cities dropdown according to local storage
 function updateRecentCitiesDropdown() {
-  let cities = JSON.parse(localStorage.getItem("recentCities")) || [];
+  let cities = JSON.parse(localStorage.getItem("recentCities")) || []; 
   recentCities.innerHTML = '<option value="">Select a city</option>';
   cities.forEach((city) => {
     let option = document.createElement("option");
@@ -164,4 +170,4 @@ function updateRecentCitiesDropdown() {
   }
 }
 
-updateRecentCitiesDropdown();
+updateRecentCitiesDropdown(); //calls on browser load to display cities in dropdown menu
