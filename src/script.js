@@ -18,3 +18,24 @@ const fetchWeather = async (city) => {
     console.log("error fetching data", error);
   }
 };
+
+const updateWeather = (data) => {
+  const current = data.list[0];
+  document.getElementById("current-date").innerHTML = new Date(
+    current.dt * 1000
+  ).join("/ ");
+  document.getElementById(
+    "current-temp"
+  ).textContent = `${current.main.temp}°C`;
+  document.getElementById(
+    "current-humidity"
+  ).innerHTML = `${current.main.humidity}%`;
+  document.getElementById(
+    "current-wind-speed"
+  ).innerHTML = `${current.wind.speed} km/h`;
+  document.getElementById(
+    "current-icon"
+  ).src = `http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`;
+  document.getElementById("current-description").innerHTML =
+    current.weather[0].description;
+};
