@@ -38,4 +38,8 @@ const updateWeather = (data) => {
   ).src = `http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`;
   document.getElementById("current-description").innerHTML =
     current.weather[0].description;
+
+    for(let i = 1; i<=5;i++){
+        
+    }
 };
