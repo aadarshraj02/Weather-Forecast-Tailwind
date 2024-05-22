@@ -39,7 +39,30 @@ const updateWeather = (data) => {
   document.getElementById("current-description").innerHTML =
     current.weather[0].description;
 
-    for(let i = 1; i<=5;i++){
-        
-    }
+  for (let i = 1; i <= 5; i++) {
+    const forecast = data.list[i * 8 - 1]; 
+    const forecastEl = document.getElementById(`forecast-${i}`);
+    forecastEl.innerHTML = `
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="mb-4 md:mb-0">
+            <p class="mb-1"><strong>Date:</strong> ${new Date(
+              forecast.dt * 1000
+            ).toDateString()}</p>
+            <p class="mb-1"><strong>Temp:</strong> ${forecast.main.temp}°C</p>
+            <p class="mb-1"><strong>Humidity:</strong> ${
+              forecast.main.humidity
+            }%</p>
+            <p class="mb-1"><strong>Wind Speed:</strong> ${
+              forecast.wind.speed
+            } km/h</p>
+          </div>
+          <div class="flex flex-col items-center">
+            <img src="http://openweathermap.org/img/wn/${
+              forecast.weather[0].icon
+            }@2x.png" alt="Weather Icon" class="w-24 h-24 mb-2" />
+            <p>${forecast.weather[0].description}</p>
+          </div>
+        </div>
+      `;
+  }
 };
