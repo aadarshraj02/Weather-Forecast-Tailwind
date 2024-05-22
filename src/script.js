@@ -6,7 +6,7 @@ const hideAll = document.querySelector(".hideAll");
 const cityInput = document.getElementById("city-input");
 const cityName = document.getElementById("city-name");
 const errorMessage = document.getElementById("error-message");
-const recentCities = document.getElementById('recent-cities');
+const recentCities = document.getElementById("recent-cities");
 
 searchBtn.addEventListener("click", function () {
   const city = document.getElementById("city-input").value.trim();
@@ -71,6 +71,13 @@ async function fetchWeatherByCoords(lat, lon) {
     displayError(error.message);
   }
 }
+
+recentCities.addEventListener("change", (event) => {
+  const city = event.target.value;
+  if (city) {
+    fetchWeather(city);
+  }
+});
 
 const updateWeather = (data) => {
   const current = data.list[0];
